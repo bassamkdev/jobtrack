@@ -1,0 +1,36 @@
+{
+  "name": "jobtrack-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "15.5.0"
+  },
+  "scripts": {
+    "start": "node .",
+    "build": "babel --delete-dir-on-start --out-dir dist --copy-files --ignore \"**/__tests__/**,**/__mocks__/**\" --no-copy-ignored src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-jwt": "^6.0.0",
+    "jwks-rsa": "^1.12.1",
+    "jwt-decode": "^3.1.2",
+    "loglevel": "^1.7.1",
+    "mongoose": "^5.11.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/register": "^7.12.10",
+    "nodemon": "^2.0.6"
+  }
+}
