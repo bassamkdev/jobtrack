@@ -19,6 +19,7 @@ function getMany(model) {
   return async function (req, res) {
     try {
       const docs = await model.find({ createdBy: req.user.sub }).lean().exec();
+
       res.status(200).json({ data: docs });
     } catch (error) {
       res.status(400).send({ message: error.message });
@@ -28,6 +29,7 @@ function getMany(model) {
 
 function createOne(model) {
   return async function (req, res) {
+    console.log(req.body);
     const createdBy = req.user.sub;
     try {
       const doc = await model.create({ ...req.body, createdBy });

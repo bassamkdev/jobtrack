@@ -9,11 +9,12 @@ import jwks from "jwks-rsa";
 import jwtDecode from "jwt-decode";
 import { connect } from "./utils/db";
 import { getRoutes } from "./routes";
+import { User } from "./resources/user/user.model";
 
 async function startServer({ port = process.env.PORT } = {}) {
   const app = express();
 
-  const attachUser = (req, res, next) => {
+  const attachUser = async (req, res, next) => {
     const token = req.headers.authorization;
     if (!token) {
       return res.status(401).json({ message: "Authentication invalid" });
@@ -24,7 +25,11 @@ async function startServer({ port = process.env.PORT } = {}) {
         .status(401)
         .json({ message: "There was a problem authorizing the request" });
     } else {
-      req.user = decodedToken;
+      let user = await User.findOne({ userId: decodedToken.sub }).exec();
+      if (!user) {
+        user = User.create({ userId: decodedToken.sub });
+      }
+      req.user.sub = user._id;
       next();
     }
   };
