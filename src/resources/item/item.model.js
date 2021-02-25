@@ -6,14 +6,23 @@ const itemSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: 50,
+      maxlength: 100,
     },
-    company: {
+    jobId: {
+      type: String,
+    },
+    companyName: {
       type: String,
       required: true,
       trim: true,
       maxlength: 50,
     },
+    companyType: String,
+    url: {
+      type: String,
+      required: true,
+    },
+    employmentType: String,
     location: {
       type: String,
       required: true,
@@ -22,7 +31,6 @@ const itemSchema = new mongoose.Schema(
     },
     notes: {
       type: String,
-      maxlength: 500,
     },
     list: {
       type: mongoose.SchemaTypes.ObjectId,
@@ -32,10 +40,6 @@ const itemSchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "user",
-      required: true,
-    },
-    lastUpdated: {
-      type: Date,
       required: true,
     },
   },

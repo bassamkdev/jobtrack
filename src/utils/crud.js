@@ -18,8 +18,7 @@ function getOne(model) {
 function getMany(model) {
   return async function (req, res) {
     try {
-      const docs = await model.find({ createdBy: req.user.sub }).lean().exec();
-
+      let docs = await model.find({ createdBy: req.user.sub }).lean().exec();
       res.status(200).json({ data: docs });
     } catch (error) {
       res.status(400).send({ message: error.message });
@@ -67,7 +66,7 @@ function updateOne(model) {
 function removeOne(model) {
   return async function (req, res) {
     try {
-      const removed = await model.findOneAndRemove({
+      const removed = await model.deleteOne({
         createdBy: req.user.sub,
         _id: req.params.id,
       });
